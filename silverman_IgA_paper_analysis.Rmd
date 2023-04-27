@@ -1,0 +1,750 @@
+---
+title: "Silverman - IgA deficiency destabilizes immune homeostasis towards intestinal microbiota and increases the risk of systemic immune dysregulation"
+author: "Ceylan Tanes - PennCHOP Microbiome Program"
+date: \today
+output: 
+    pdf_document:
+      toc: true
+---
+
+```{r knitr setup, echo=FALSE}
+library(knitr)
+opts_chunk$set(
+  tidy=FALSE,
+  cache=FALSE,
+  echo=FALSE,
+  warning=FALSE,
+  message=FALSE,
+  dpi=100,
+  fig.width=6,
+  fig.height=4,
+  fig.align = "center"
+  )
+```
+
+
+```{r child = 'silverman_IgA_paper_preamble.Rmd'}
+```
+
+
+# Unsorted fecal analysis
+
+Number of samples in each study group and study day.
+
+```{r}
+s_feces <- s %>%
+  filter(Keep) %>%
+  filter(!isControl) %>%
+  filter(SampleType == "Feces") %>%
+  droplevels()
+  
+pander(table(s_feces$Household), caption = "Number of subjects in each household.")
+```
+
+```{r}
+# Bar plot of averages
+
+data_toPlot <- summed_props_f %>%
+  melt() %>%
+  setNames(c("Taxa", "SampleID", "props")) %>%
+  merge(s_feces, by="SampleID") %>%
+  
+  group_by(Analysis4, Taxa) %>%
+  summarize(props = mean(props)) %>%
+  ungroup() %>%
+  
+  mutate(Taxa2 = fct_lump(Taxa, 8, w=props)) %>% #select(SampleID, Taxa, Taxa2) %>% View
+  group_by(Analysis4, Taxa2) %>%
+  summarize(props = sum(props)) %>%
+  ungroup() %>%
+
+  mutate(Taxa2 = reorder(Taxa2, props)) %>%
+  mutate(Taxa2 = fct_relevel(Taxa2, "Other", after=0)) %>%
+  mutate(Taxa2 = fct_relabel(Taxa2, function(x) sub("p__.* f__", "", x))) %>%
+  
+  mutate(Analysis4 = fct_recode(Analysis4, `Fecal IgA+`="Pos_Stool", `Fecal IgA-`="Neg_Stool")) 
+
+write.table(data_toPlot, file="silverman_Supp_Fig2E_data.txt", sep='\t', row.names=F, quote=F)
+
+data_toPlot %>%
+  
+  ggplot(aes(x=Analysis4, y=props, fill=Taxa2)) +
+    geom_bar(stat="identity") +
+    scale_fill_brewer(palette = 'Set1', direction=-1) +
+    scale_y_continuous(limits = c(0,1), expand=c(0,0), labels=scales:::percent) +
+    theme_classic() +
+    theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5)) +
+    labs(x="", y="Relative abundance", fill="")
+
+ggsave("silverman_Supp_Fig2E.pdf", height=3.2, width=3.2, useDingbats=F)
+```
+
+
+```{r}
+s_feces %>%
+  select(SampleID, SubjectID, Household, Analysis4, shannon) %>%
+  write.table(file="silverman_Supp_Fig2F_data.txt", sep='\t', row.names=F, quote=F)
+
+s_feces %>%
+  ggplot(aes(x=Analysis4, y=shannon, color=Analysis4)) +
+    geom_boxplot(outlier.alpha=0) +
+    geom_quasirandom(dodge.width = 0.75) +
+    scale_color_brewer(palette = 'Set1', direction=-1) +
+    theme_bw() +
+    theme(
+      strip.background = element_blank(),
+      panel.grid=element_blank(),
+      aspect.ratio = 1
+    ) +
+    guides(color=F) +
+    labs(
+      x="", color="",
+      y="Shannon diversity"
+    )
+ggsave("silverman_Supp_Fig2F.pdf", height=3, width=3, useDingbats=F)
+```
+
+
+Linear models were used to estimate the difference between cases and controls for each categorization.
+
+```{r}
+summaries_df <- s_feces %>%
+  do(tidy(lm(shannon ~ Analysis4, data=.))) %>%
+  filter(!grepl("Intercept", term)) %>%
+  mutate(term = sub("Analysis4Neg_Stool", "Pos - Neg Stool", term))
+
+summaries_df %>%
+  pander(split.table=Inf, digits=2)
+```
+
+
+Linear mixed effects models were used to estimate the difference between cases and controls for each categorization. Family IDs were used as random effects.
+
+```{r}
+summaries_df <- s_feces %>%
+  do(tidy_lmer(nlme::lme(shannon ~ Analysis4, random=~1|Household, data=., na.action=na.omit))) %>%
+  filter(!grepl("Intercept", term)) %>%
+  mutate(term = sub("Analysis4Neg_Stool", "Pos - Neg Stool", term))
+
+summaries_df %>%
+  pander(split.table=Inf, digits=2)
+```
+
+
+```{r}
+dist_toTest <- dist_subset(wu, s_feces$SampleID)
+pc <- pcoa(dist_toTest)
+pc_df <- merge(s_feces, pc$vectors[, 1:3], by.x="SampleID", by.y="row.names")
+pct <- round(pc$values$Relative_eig * 100)
+
+pc_df %>%
+  select(SampleID, SubjectID, Household, Analysis4, Axis.1, Axis.2) %>%
+  write.table(file="silverman_Supp_Fig2G_data.txt", sep='\t', row.names=F, quote=F)
+
+pc_df %>%
+  ggplot(aes(x=Axis.1, y=Axis.2, color=Analysis4)) +
+    geom_point() +
+    stat_ellipse() +
+    scale_color_brewer(palette="Set1", direction=-1) +
+    scale_shape_manual(values=c(1,16,17)) + 
+    theme_bw() +
+    theme(
+      axis.text=element_blank(),
+      axis.ticks=element_blank(),
+      panel.grid = element_blank(), 
+      strip.background = element_blank(),
+      aspect.ratio = 1
+    ) + 
+    labs(x=paste0("PCoA axis 1 (", pct[1], "%)"), 
+         y=paste0("PCoA axis 2 (", pct[2], "%)"),
+         color="", shape="")
+ggsave("silverman_Supp_Fig2G.pdf", height=3, width=4, useDingbats=F)
+```
+
+
+PERMANOVA test on weighted UniFrac distances to test if the centroids of the study groups can be distinguished from each other.
+
+```{r}
+set.seed(42)
+summaries_df <- s_feces %>%
+  do(tidy_permanova(adonis(usedist::dist_subset(wu, .$SampleID) ~ Analysis4, data=., permutations=999))) %>%
+  
+  filter(!Term %in% c("Residuals", "Total")) %>%
+  select(-one_of(c("SumsOfSqs", "MeanSqs")))
+
+
+summaries_df %>%
+  pander(split.table=Inf, digits=2)
+  
+
+```
+
+
+# FACS samples - stool only IgA and IgM sorted
+
+
+```{r}
+s_toTest <- s %>%
+  filter(!isControl) %>%
+  filter(Keep) %>%
+  filter(include %in% "yes") %>%
+  filter(Study_group == "4A") %>%
+  droplevels()
+
+pander(table(s_toTest$SubjectID, s_toTest$Population), caption = "Sampled populations from each subject.")
+
+pander(table(s_toTest$Population), caption = "Total number of populations sequenced.")
+```
+
+
+```{r}
+library(readr)
+## read in IgApos and IgAneg fraction data
+fraction_data <- read_delim(file.path(data_dir, "IgA_IgM_fraction_data.txt"), delim='\t') %>%
+  mutate(SubjectID = paste0("F", SubjectID)) %>%
+  mutate(SubjectID = sub("-", ".", SubjectID)) %>%
+  gather("pop", "fraction", -SubjectID, -study_group) %>%
+  separate(pop, into=c("Study_group", "Population"), sep=" ") %>%
+  
+  rename(Analysis4 = study_group) %>%
+  mutate(Analysis4 = factor(Analysis4)) %>%
+  mutate(Analysis4 = fct_recode(Analysis4, Pos_Stool="Control", Neg_Stool="Case")) %>%
+  
+  mutate(fraction = fraction/100)
+```
+
+
+```{r}
+## tidy the proportions in the fecal samples
+s_feces <- s %>%
+  filter(Keep) %>%
+  filter(!isControl) %>%
+  filter(SampleType == "Feces") %>%
+  droplevels()
+
+props_toTest_feces <- otu_props %>%
+  melt() %>%
+  setNames(c("Taxa", "SampleID", "feces_props")) %>%
+  right_join(select(s_feces, SampleID, SubjectID, Analysis4), by="SampleID") %>%
+  droplevels() %>%
+  merge(a, by.x="Taxa", by.y="row.names", all.x=T) %>%
+  rename(Name = y) %>%
+  mutate(Name = gsub("[pcofgs]__", "", Name)) %>%
+  mutate(Taxa = paste(Name, Taxa, sep = ' ')) %>%
+  select(-Name)
+```
+
+```{r}
+pseudo <- 0.00001
+
+## set up the dataframe to calculate the probabilities and prob ratios
+props_toTest_facs <- otu_props %>%
+  melt() %>%
+  setNames(c("Taxa", "SampleID", "props")) %>%
+  right_join(select(s_toTest, SampleID, SubjectID, Analysis4, Population), by="SampleID") %>%
+  droplevels() %>%
+  
+  merge(a, by.x="Taxa", by.y="row.names", all.x=T) %>%
+  rename(Name = y) %>%
+  mutate(Name = gsub("[pcofgs]__", "", Name)) %>%
+  mutate(SNV = Taxa) %>%
+  mutate(Taxa = paste(Name, Taxa, sep = ' ')) %>%
+  
+  filter(SNV %in% ASVs_toTest) %>% ## filter for the predetermined ASV
+  
+  left_join(select(fraction_data, -Study_group), by=c("SubjectID", "Analysis4", "Population")) 
+
+## calculate probabilities
+probabilities <- props_toTest_facs %>%
+  left_join(props_toTest_feces, by=c("Taxa", "SubjectID", "Analysis4")) %>%
+  mutate(probs = (props*fraction) / max(feces_props, props*fraction))
+
+
+## calculate probability ratios
+props_toTest_all <- props_toTest_facs %>%
+  mutate(temp = (props * fraction) + pseudo) %>%
+  select(-one_of(c("props", "fraction", "SampleID"))) %>%
+  spread(Population, temp) %>%
+  gather("Population", "value", `IgA+IgM-`, `IgM+IgA-`, `IgM+IgA+`) %>%
+  filter(!is.na(value)) %>%
+  mutate(prob_ratio = log2(value / `IgA-IgM-IgG-`)) %>%
+  mutate(prob_ratio = prob_ratio / log2((1+pseudo)/pseudo)) %>%
+  
+  mutate(prob_ratio_log10 = log10(value / `IgA-IgM-IgG-`))
+```
+
+
+
+```{r}
+logratios_to_relabund <- function (y, base = 10) {
+  # Get ratios from log-ratios
+  x <- base ** y
+  # The denominator's ratio with itself is 1, so add that on
+  x <- c(x, 1)
+  # Normalize to get the relative abundances
+  x / sum(x)
+}
+
+relabund_to_logratios <- function (x, base = 10) {
+  # The last value will be the denominator
+  idx <- length(x)
+  # Take the log ratios. Last value will be equal to 1
+  y <- log(x / x[idx], base = base)
+  # Now remove that last value
+  y[-idx]
+}
+
+
+calculate_relab <- function(x, Analysis4) {
+  if(Analysis4 == "Pos_Stool") {
+    ratios <- logratios_to_relabund(c(x$`IgA+IgM-`,  x$`IgM+IgA-`, x$`IgM+IgA+`))
+    data_frame(`IgA+IgM-`=ratios[1], `IgM+IgA-`=ratios[2], `IgM+IgA+`=ratios[3], `IgA-IgM-IgG-`=ratios[4])
+  } else {
+    ratios <- logratios_to_relabund(c(x$`IgM+IgA-`))
+    data_frame(`IgA+IgM-`=NA, `IgM+IgA-`=ratios[1], `IgM+IgA+`=NA, `IgA-IgM-IgG-`=ratios[2])
+  }
+}
+
+## calculate ALR transformed probabilities
+props_toTest_all_relabs <- props_toTest_all %>%
+  select(-one_of("value", "prob_ratio", "IgA-IgM-IgG-")) %>%
+  spread(Population, prob_ratio_log10) %>%
+  group_by(Taxa, SubjectID, Analysis4, Name, SNV) %>%
+  group_modify(~ calculate_relab(.x,.y$Analysis4)) %>%
+  ungroup() %>%
+  gather("Population", "props", -Taxa, -SubjectID, -Analysis4, -Name, -SNV) %>%
+  filter(!is.na(props))
+
+
+props_toTest_all_relabs %>%
+  pivot_wider(names_from="Population", values_from="props") %>%
+  write.table(file="silverman_SuppFig3_data.txt", sep='\t', row.names=F, quote=F)
+```
+
+
+## Looking at healthy population only
+
+```{r}
+A_M_probabilities <- props_toTest_all_relabs %>%
+  
+  filter(Analysis4 == "Pos_Stool") %>% # only look at the healthy population
+  filter(SNV != "8d703908c09c7cb0da2a4398dd74f9f8") %>% ## take out the ASV with 0 variance
+  
+  select(Taxa, SNV, Name, SubjectID, Analysis4, Population, props) %>%
+  spread(Population, props) %>%
+  
+  mutate(Aprob = `IgA+IgM-` + `IgM+IgA+`) %>%
+  mutate(Mprob = `IgM+IgA-` + `IgM+IgA+`)
+
+```
+
+
+The angle of the vector defining the probability of binding to IgM and probability of binding to IgA are calculated for each subject. M targeted SNVs are defined as having an angle greater than 45 degrees. A targeted SNVs are defined as having an angle less than 45 degrees.
+
+```{r}
+Mtargeted <- A_M_probabilities %>%
+  
+  mutate(angle = atan2(Mprob, Aprob)) %>%
+  
+  group_by(Taxa, SNV, Name) %>%
+  do(tidy(t.test(.$angle, mu=pi/4, alternative="greater"))) %>%
+  ungroup() %>%
+  
+  mutate(fdr = p.adjust(p.value, method="BH"))
+
+
+```
+
+
+```{r}
+Atargeted <- A_M_probabilities %>%
+  
+  mutate(angle = atan2(Mprob, Aprob)) %>%
+  
+  group_by(Taxa, SNV, Name) %>%
+  do(tidy(t.test(.$angle, mu=pi/4, alternative="less"))) %>%
+  ungroup() %>%
+  
+  mutate(fdr = p.adjust(p.value, method="BH"))
+
+
+```
+
+
+
+### Fig 1C
+
+```{r}
+data_toPlot <- A_M_probabilities %>%
+  
+  group_by(Taxa, SNV, Name) %>%
+  summarize(meanA = mean(Aprob), seA=se(Aprob), meanM=mean(Mprob), seM=se(Mprob)) %>%
+  ungroup() %>%
+  
+  mutate(target = ifelse(SNV %in% as.character(filter(Mtargeted, fdr<0.1)$SNV), "IgM+", "None")) %>%
+  mutate(target = ifelse(SNV %in% as.character(filter(Atargeted, fdr<0.1)$SNV), "IgA+", target)) %>%
+  
+  mutate(Name_lumped = fct_lump(Name, 8))
+  
+temp <- props_temp_feces %>%
+  right_join(select(s_feces, SubjectID, Analysis4), by="SubjectID") %>%
+  filter(Analysis4 == "Pos_Stool") %>%
+  group_by(Taxa) %>%
+  summarize(mean_feces_prop = mean(props_feces)) %>%
+  ungroup() %>%
+  rename(SNV=Taxa)
+
+
+data_toPlot %>%
+  left_join(temp, by="SNV") %>%  
+  write.table("silverman_Fig1C_data.txt", sep='\t', row.names=F, quote=F)
+
+data_toPlot %>%
+  left_join(temp, by="SNV") %>%  
+  ggplot(aes(x=meanA, y=meanM, shape=target, size=mean_feces_prop)) +
+    geom_abline(slope=1, intercept=0, linetype=2) +
+    geom_errorbar(data=filter(data_toPlot, target %in% c("IgM+", "IgA+")), mapping=aes(x=meanA, y=meanM, ymin=meanM+seM, ymax=meanM-seM, color=Name_lumped), width=0, inherit.aes = F) + 
+    geom_errorbar(data=filter(data_toPlot, target %in% c("IgM+", "IgA+")), mapping=aes(x=meanA, y=meanM, xmin=meanA-seA, xmax=meanA+seA, color=Name_lumped), width=0, inherit.aes = F) + 
+    geom_point(aes(alpha=target)) +
+    scale_color_brewer(palette="Set1") +
+    scale_alpha_manual(values=c(1,1,0.3)) +
+    scale_shape_manual(values=c(15,17,16)) +
+    scale_size_continuous(labels=scales:::percent, breaks=c(0.01, 0.05, 0.1)) +
+    scale_y_continuous(limits=c(0,1), expand=c(0,0)) +
+    scale_x_continuous(limits=c(0,1), expand=c(0,0)) +
+    theme_bw() +
+    theme(
+      strip.background = element_blank(),
+      aspect.ratio = 1
+    ) +
+    coord_equal() +
+    labs(
+      x="IgA+ probability (IgA+IgM- & IgA+IgM+)", color="", size="Mean abundance\nin stool",
+      y="IgM+ probability (IgM+IgA- & IgA+IgM+)"
+    )
+
+ggsave("silverman_Fig1C.pdf", height=7, width=6.5, useDingbats=F)
+
+```
+
+
+
+
+## What are the changes in the SigAD group?
+
+```{r}
+A_M_probabilities_sigad_all <- props_toTest_all_relabs %>%
+  
+  filter(Analysis4 == "Neg_Stool") %>% # pull in the IgA deficient population
+  filter(SNV != "8d703908c09c7cb0da2a4398dd74f9f8") %>% ## take out the ASV with 0 variance
+  
+  select(Taxa, SNV, Name, SubjectID, Analysis4, Population, props) %>%
+  spread(Population, props) %>%
+  
+  mutate(Mprob = `IgM+IgA-`) %>% #since they don't have IgA, probability of binding to IgM is equal to probability of IgM+IgA-
+  
+  bind_rows(A_M_probabilities) 
+
+
+A_M_probabilities_sigad <- A_M_probabilities_sigad_all %>%
+  
+  filter(SNV %in% as.character(filter(Atargeted, fdr<0.1)$SNV)) %>%
+  
+  mutate(A_and_M_prob = `IgM+IgA-` + `IgM+IgA+` + `IgA+IgM-`) %>%
+  mutate(A_and_M_prob = ifelse(is.na(A_and_M_prob), Mprob, A_and_M_prob))
+  
+
+A_M_probabilities_sigad %>%
+  write.table(file="silverman_SuppFig5D_data.txt", sep='\t', quote=F, row.names=F)
+```
+
+
+### Supp Fig 5D
+
+```{r}
+A_M_probabilities_sigad %>%
+  mutate(Taxa = gsub(".{25}$", "", Taxa)) %>%
+  group_by(Taxa, Analysis4) %>%
+  summarize(mean_prob = mean(A_and_M_prob), se_prob = se(A_and_M_prob)) %>%
+  
+  ggplot(aes(x=Taxa, y=mean_prob, color=Analysis4)) +
+    geom_pointrange(aes(ymin=mean_prob-se_prob, ymax=mean_prob+se_prob)) +
+    scale_color_brewer(palette="Set1", direction=-1) +
+    coord_flip() +
+    theme_bw() +
+    labs(
+      x="", color="",
+      y="IgA and IgM probabilities"
+    )
+ggsave("silverman_SuppFig5D.pdf", height=2, width=6, useDingbats=F)
+
+```
+
+Result of t test
+```{r}
+
+A_M_probabilities_sigad %>%
+  group_by(Taxa, SNV, Name) %>%
+  do(tidy(t.test(A_and_M_prob ~ Analysis4, data=., alternative="two.sided"))) %>%
+  ungroup() %>%
+  mutate(fdr = p.adjust(p.value, method="BH")) %>%
+  select(Taxa, p.value, fdr) %>%
+  pander(split.table=Inf, digits=2)
+```
+
+
+Results of Wilcoxon rank sum test
+
+```{r}
+A_M_probabilities_sigad %>%
+  group_by(Taxa, SNV, Name) %>%
+  do(tidy(wilcox.test(A_and_M_prob ~ Analysis4, data=., alternative="two.sided"))) %>%
+  ungroup() %>%
+  mutate(fdr = p.adjust(p.value, method="BH")) %>%
+  select(Taxa, p.value, fdr) %>%
+  pander(split.table=Inf, digits=2)
+
+
+```
+
+
+
+# FACS samples - stool only IgG and IgM sorted
+
+
+```{r}
+s_toTest <- s %>%
+  filter(!isControl) %>%
+  filter(Keep) %>%
+  filter(include %in% "yes") %>%
+  filter(Study_group == "5A") %>%
+  filter(grepl("IgM", Population)) %>%
+  droplevels()
+
+pander(table(s_toTest$SubjectID, s_toTest$Population), split.table=Inf, caption = "Sampled populations from each subject.")
+
+pander(table(s_toTest$Population), caption = "Total number of populations sequenced.")
+
+
+s_toTest %>% 
+  select(SubjectID, Analysis4) %>% 
+  unique() %>% 
+  group_by(Analysis4) %>% 
+  summarize(num_subjects = n()) %>% 
+  ungroup() %>%
+  pander(split.table=Inf, digits=2)
+```
+
+
+```{r}
+library(readr)
+## read in IgApos and IgAneg fraction data
+fraction_data <- read_delim(file.path(data_dir, "IgG_IgM_fraction_data.txt"), delim='\t') %>%
+  mutate(SubjectID = paste0("F", SubjectID)) %>%
+  mutate(SubjectID = sub("-", ".", SubjectID)) %>%
+  gather("pop", "fraction", -SubjectID, -study_group) %>%
+  separate(pop, into=c("Study_group", "Population"), sep=" ") %>%
+  
+  rename(Analysis4 = study_group) %>%
+  mutate(Analysis4 = factor(Analysis4)) %>%
+  mutate(Analysis4 = fct_recode(Analysis4, Pos_Stool="Control", Neg_Stool="Case")) %>%
+  
+  mutate(fraction = fraction/100)
+```
+
+
+
+```{r}
+## tidy the proportions in the fecal samples
+s_feces <- s %>%
+  filter(Keep) %>%
+  filter(!isControl) %>%
+  filter(SampleType == "Feces") %>%
+  droplevels()
+
+props_toTest_feces <- otu_props %>%
+  melt() %>%
+  setNames(c("Taxa", "SampleID", "feces_props")) %>%
+  right_join(select(s_feces, SampleID, SubjectID, Analysis4), by="SampleID") %>%
+  droplevels() %>%
+  merge(a, by.x="Taxa", by.y="row.names", all.x=T) %>%
+  rename(Name = y) %>%
+  mutate(Name = gsub("[pcofgs]__", "", Name)) %>%
+  mutate(Taxa = paste(Name, Taxa, sep = ' ')) %>%
+  select(-Name)
+```
+
+
+```{r}
+pseudo <- 0.00001
+
+
+## set up the dataframe to calculate the probabilities and prob ratios
+props_toTest_facs <- otu_props %>%
+  melt() %>%
+  setNames(c("Taxa", "SampleID", "props")) %>%
+  right_join(select(s_toTest, SampleID, SubjectID, Analysis4, Population), by="SampleID") %>%
+  droplevels() %>%
+  
+  merge(a, by.x="Taxa", by.y="row.names", all.x=T) %>%
+  rename(Name = y) %>%
+  mutate(Name = gsub("[pcofgs]__", "", Name)) %>%
+  mutate(SNV = Taxa) %>%
+  mutate(Taxa = paste(Name, Taxa, sep = ' ')) %>%
+  
+  filter(SNV %in% ASVs_toTest) %>% ## filter for the predetermined ASV
+  
+  left_join(select(fraction_data, -Study_group), by=c("SubjectID", "Analysis4", "Population")) 
+
+## calculate probabilities
+probabilities <- props_toTest_facs %>%
+  left_join(props_toTest_feces, by=c("Taxa", "SubjectID", "Analysis4")) %>%
+  mutate(probs = (props*fraction) / max(feces_props, props*fraction))
+
+
+## calculate probability ratios
+props_toTest_all <- props_toTest_facs %>%
+  mutate(temp = (props * fraction) + pseudo) %>%
+  select(-one_of(c("props", "fraction", "SampleID"))) %>%
+  spread(Population, temp) %>%
+  gather("Population", "value", `IgG+IgM-`, `IgM+IgG-`, `IgG+IgM+`) %>%
+  filter(!is.na(value)) %>%
+  mutate(prob_ratio = log2(value / `IgA-IgM-IgG-`)) %>%
+  mutate(prob_ratio = prob_ratio / log2((1+pseudo)/pseudo)) %>%
+  
+  mutate(prob_ratio_log10 = log10(value / `IgA-IgM-IgG-`))
+```
+
+
+```{r}
+
+calculate_relab2 <- function(x, columns, denom_column) {
+  filled <- which(!is.na(x[,columns]))
+  ratios <- logratios_to_relabund(as.numeric(as.vector(x[,columns[filled]])))
+  
+  values <- rep(NA, length(columns)+1)
+  values[filled] <- ratios[1:length(ratios)-1]
+  values[length(columns)+1] <- ratios[length(ratios)]
+  
+  data.frame(t(values)) %>% setNames(c(columns, denom_column))
+}
+
+## calculate ALR transformed probabilities
+props_toTest_all_relabs <- props_toTest_all %>%
+  select(-one_of("value", "prob_ratio", "IgA-IgM-IgG-")) %>%
+  spread(Population, prob_ratio_log10) %>%
+  group_by(Taxa, SubjectID, Analysis4, Name, SNV) %>%
+  group_modify(~ calculate_relab2(.x, c("IgG+IgM-", "IgM+IgG-", "IgG+IgM+"), "IgA-IgM-IgG-")) %>%
+  ungroup() %>%
+  gather("Population", "props", -Taxa, -SubjectID, -Analysis4, -Name, -SNV) %>%
+  filter(!is.na(props))
+
+
+props_toTest_all_relabs %>%
+  pivot_wider(names_from="Population", values_from="props") %>%
+  write.table(file="silverman_SuppFig4_data.txt", sep='\t', row.names=F, quote=F)
+```
+
+
+```{r}
+G_M_probabilities <- props_toTest_all_relabs %>%
+  
+  #filter(Analysis4 == "Pos_Stool") %>% # only look at the healthy population
+  filter(SNV != "8d703908c09c7cb0da2a4398dd74f9f8") %>% ## take out the ASV with 0 variance
+  
+  select(Taxa, SNV, Name, SubjectID, Analysis4, Population, props) %>%
+  spread(Population, props) %>%
+  
+  mutate(`IgG+IgM-` = ifelse(is.na(`IgG+IgM-`), 0, `IgG+IgM-`)) %>%
+  
+  mutate(Gprob = `IgG+IgM-` + `IgG+IgM+`) %>%
+  mutate(Mprob = `IgM+IgG-` + `IgG+IgM+`)
+```
+
+
+```{r }
+Mtargeted <- G_M_probabilities %>%
+  
+  mutate(angle = atan2(Mprob, Gprob)) %>%
+  
+  group_by(Taxa, SNV, Name, Analysis4) %>%
+  do(tidy(t.test(.$angle, mu=pi/4, alternative="greater"))) %>%
+  ungroup() %>%
+  
+  mutate(fdr = p.adjust(p.value, method="BH"))
+
+
+```
+
+
+```{r}
+Gtargeted <- G_M_probabilities %>%
+  
+  mutate(angle = atan2(Mprob, Gprob)) %>%
+  
+  group_by(Taxa, SNV, Name, Analysis4) %>%
+  do(tidy(t.test(.$angle, mu=pi/4, alternative="less"))) %>%
+  ungroup() %>%
+  
+  mutate(fdr = p.adjust(p.value, method="BH"))
+
+
+```
+
+## What are the changes in the SigAD group?
+
+### Supp Fig 9A
+
+```{r}
+data_toPlot <- G_M_probabilities %>%
+    
+  group_by(Taxa, SNV, Name, Analysis4) %>%
+  summarize(meanG = mean(Gprob), seG=se(Gprob), meanM=mean(Mprob), seM=se(Mprob)) %>%
+  ungroup() %>%
+  
+  left_join(filter(Mtargeted, fdr<0.1) %>% select(Taxa, Analysis4) %>% mutate(target="IgM+"), by=c("Taxa", "Analysis4")) %>%
+  left_join(filter(Gtargeted, fdr<0.1) %>% select(Taxa, Analysis4) %>% mutate(target="IgG+"), by=c("Taxa", "Analysis4")) %>%
+  mutate(target.x = ifelse(is.na(target.x), target.y, target.x)) %>%
+  mutate(target.x = ifelse(is.na(target.x), "None", target.x)) %>%
+  select(-target.y) %>%
+  rename(target = target.x) %>%
+  
+  mutate(Name_lumped = fct_lump(Name, 8)) %>%
+  
+  mutate(forShape = interaction(target, Analysis4))
+
+
+data_toPlot %>%
+  write.table("silverman_SuppFig9A_data.txt", sep='\t', quote=F, row.names=F)
+
+segments_temp <- data_toPlot %>%
+  select(Taxa, Name_lumped, Analysis4, meanG, meanM) %>%
+  gather("Ig", "prob", meanG, meanM) %>%
+  mutate(cols = paste(Analysis4, Ig, sep="_")) %>%
+  select(-one_of(c("Analysis4", "Ig"))) %>%
+  spread(cols, prob)
+
+data_toPlot %>%
+  
+  ggplot(aes(x=meanG, y=meanM, group=Taxa)) +
+    geom_abline(slope=1, intercept=0, linetype=2) +
+    geom_point(aes(alpha=target)) +
+    geom_segment(data=segments_temp, inherit.aes=F, aes(x=Pos_Stool_meanG, y=Pos_Stool_meanM, xend=Neg_Stool_meanG, yend=Neg_Stool_meanM, color=Name_lumped), arrow=arrow(length = unit(0.075, "in"))) +
+    scale_color_brewer(palette="Set1") +
+    scale_alpha_manual(values=c(1,0.3)) +
+    scale_shape_manual(values=c(15,16,0,1)) +
+    scale_y_continuous(limits=c(0,1), expand=c(0,0)) +
+    scale_x_continuous(limits=c(0,1), expand=c(0,0)) +
+    theme_bw() +
+    theme(
+      strip.background = element_blank()
+    ) +
+    coord_equal() +
+    labs(
+      x="IgG+ probability (IgG+IgM- & IgG+IgM+)", color="", 
+      y="IgM+ probability (IgM+IgG- & IgG+IgM+)"
+    )
+
+ggsave("silverman_SuppFig9A.pdf", height=5, width=6, useDingbats=F)
+
+```

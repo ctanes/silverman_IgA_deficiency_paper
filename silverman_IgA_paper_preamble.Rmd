@@ -1,0 +1,222 @@
+```{r R packages, message=FALSE}
+library(pheatmap)
+#library(grid)
+library(ggplot2)
+library(RColorBrewer)
+library(viridis)
+library(ggbeeswarm)
+#library(wesanderson)
+#library(ghibli)
+
+library(tidyverse)
+library(reshape2)
+library(broom)
+
+library(pander)
+library(stringr)
+library(qiimer)
+library(vegan)
+library(ape)
+
+library(usedist)
+library(lme4)
+library(nlme)
+library(emmeans) # for lmer post-hoc tests
+```
+
+```{r}
+se <- function(x) sd(x)/sqrt(length(x))
+
+tidy_lmer <- function(lmer_test) {
+  mod <- summary(lmer_test)
+  data.frame(term  = rownames(mod$tTable), mod$tTable, row.names=NULL)
+}
+
+tidy_permanova <- function(anov){
+  data.frame(Term = rownames(anov$aov.tab), anov$aov.tab, row.names = NULL) %>%
+    rename(p.value = Pr..F.)
+}
+```
+
+
+```{r}
+### ===========================
+###   define constants
+### ===========================
+
+data_dir <- "Data"
+
+### minimum reads threshold
+min_reads <- 1000
+
+### rarefying subsample size 
+richness_subsample_size <- 1000
+
+### mapping file path
+mapping_file_fp <- file.path(data_dir, "SIgAD_metadata.txt")
+
+### otu table file path
+feature_table_fp <- file.path(data_dir, "feature-table.tsv")
+
+### taxonomic assignment 
+taxo_assignment_fp <- file.path(data_dir, "taxonomy.tsv")
+
+### weighted UniFrac file path
+wu_fp <- file.path(data_dir, "wu.tsv")
+
+perm <- 999
+```
+
+
+```{r, warning=F}
+
+### read mapping file
+s <- read_qiime_mapping_file(mapping_file_fp) %>%
+  mutate(Analysis4 = fct_rev(Analysis4)) 
+
+### read otu table
+counts <- readr::read_delim(feature_table_fp, skip=1, delim="\t") %>%
+  column_to_rownames(var = "#OTU ID") %>%
+  as.matrix()
+
+### get read counts
+read_counts <- colSums(counts) %>% 
+  as.data.frame() %>%
+  setNames(c("Read_Counts")) %>%
+  rownames_to_column(var="SampleID")
+
+### find the samples to keep
+s <- merge(s, read_counts, by="SampleID", all.x=T) %>%
+  mutate(Keep = Read_Counts > min_reads) %>%
+  mutate(isControl = SampleType %in% c("DNA-free water", "Lab water", "Mock DNA", "Sheath", "Sheath fluid", "SLP Control"))# %>%
+  #mutate(isControl = grepl("geneblock|freewater|extract|control", SampleID, ignore.case = TRUE))
+
+### taxonomic assignment
+ta <- read_delim(file=taxo_assignment_fp, delim="\t") %>%
+  mutate(trunc_taxon = sub("(; [kpcofgs]__)+$", "", Taxon, perl=T)) %>%
+  arrange(order(match(rownames(counts), `Feature ID`)))
+
+### check if the order of the assignments and the order of featue table is the same
+if (!all(rownames(counts) == ta$`Feature ID`)) {
+  stop (simpleError("The order of the features in the table and classifications don't match"))
+}
+
+adf <- split_assignments(ta$trunc_taxon) 
+
+### remove contamination
+is_mitochondrial <- grepl("mitochondria", adf$Family)
+is_chloroplast <- grepl("Chloroplast", adf$Class)
+is_unassigned <- is.na(adf$Phylum)
+is_archaea <- grepl("Archaea", adf$Kingdom)
+is_contam <- is_mitochondrial | is_chloroplast | is_unassigned ### Archaea kept to check positive control samples
+counts <- counts[!is_contam,]
+adf <- adf[!is_contam,]
+ta <- ta[!is_contam,]
+rm(is_contam, is_mitochondrial, is_chloroplast, is_unassigned, is_archaea)
+
+a <- simplify_assignments(adf, rank1="Phylum", rank2="Genus")
+names(a) <- ta$`Feature ID`
+summed_cts <- rowsum(counts, a) 
+summed_props <- sweep(summed_cts, 2, colSums(summed_cts), "/")
+otu_props <- sweep(counts, 2, colSums(counts), "/")
+
+s <- merge(s, data.frame(otu_counts= colSums(summed_cts)), by.x="SampleID", by.y="row.names", all.x=T)
+
+a_p <- simplify_assignments(adf, rank1="Kingdom", rank2="Phylum")
+summed_cts_p <- rowsum(counts, a_p) 
+summed_props_p <- sweep(summed_cts_p, 2, colSums(summed_cts_p), "/")
+
+a_f <- simplify_assignments(adf, rank1="Phylum", rank2="Family")
+summed_cts_f <- rowsum(counts, a_f) 
+summed_props_f <- sweep(summed_cts_f, 2, colSums(summed_cts_f), "/")
+```
+
+
+```{r alpha}
+s <- s %>%
+  merge(diversity(t(counts)), by.x="SampleID", by.y="row.names", all.x=T) %>%
+  dplyr::rename(shannon = y) %>%
+  merge(rarefy(t(counts), richness_subsample_size), by.x="SampleID", by.y="row.names", all.x=T) %>%
+  dplyr::rename(richness = y) 
+```
+
+```{r beta}
+wu <- read_qiime_distmat(wu_fp)
+```
+
+
+
+```{r}
+## sanity check: are the sorted ASVs also found in their corresponding fecal samples?
+props_temp <- otu_props %>%
+  melt() %>%
+  setNames(c("Taxa", "SampleID", "props")) %>%
+  right_join(s, by="SampleID") %>%
+  
+  filter(!isControl) %>%
+  filter(Keep) 
+
+
+
+props_temp_feces <- props_temp %>%
+  filter(SampleType == "Feces") %>%
+  droplevels() %>%
+  select(Taxa, SubjectID, props_feces = props)
+
+props_temp_facs_per_population <- props_temp %>%
+  filter(include %in% "yes") %>%
+  filter(Study_group=="4A" | (Study_group=="5A" & grepl("IgM", Population))) %>% ## Only pick the ASVS based on what's going into the paper
+  droplevels() %>%
+  select(Taxa, SampleID, props, SubjectID, SampleType, Study_group, Analysis4, Population) %>%
+  mutate(present_in_facs = props > 0) %>%
+  
+  group_by(Taxa, Study_group, Analysis4, Population) %>%
+  summarize(perc_in_facs = sum(present_in_facs)/n()) %>%
+  ungroup() %>%
+  
+  mutate(group = interaction(Population, Analysis4, Study_group)) %>%
+  
+  select(Taxa, group, perc_in_facs) %>%
+  
+  spread(group, perc_in_facs)
+
+
+
+## Find the fecal ASVs that show up in ANY population
+props_temp_facs <- props_temp %>%
+  filter(include %in% "yes") %>%
+  filter(Study_group=="4A" | (Study_group=="5A" & grepl("IgM", Population))) %>% ## Only pick the ASVS based on what's going into the paper
+  droplevels() %>%
+  select(Taxa, SampleID, props, SubjectID, SampleType, Study_group, Analysis4, Population) %>%
+  left_join(props_temp_feces, by=c("Taxa", "SubjectID")) %>%
+  mutate(present_in_facs = props > 0) %>%
+  mutate(present_in_feces = props_feces > 0) %>%
+  mutate(present_in_both = present_in_facs & present_in_feces) %>%
+  mutate(present_facs_not_poop = present_in_facs & !present_in_feces) %>%
+  
+  group_by(Taxa, SubjectID) %>%
+  summarize(present_in_both = sum(present_in_both), present_facs_not_poop = sum(present_facs_not_poop), present_poop = sum(present_in_feces)>0) %>%
+  ungroup() %>%
+  
+  group_by(Taxa) %>%
+  summarize(present_in_both = sum(present_in_both>0), present_facs_not_poop = sum(present_facs_not_poop>0), present_poop = sum(present_poop)) %>%
+  ungroup() %>%
+  
+  mutate(in_facs_given_in_poop = present_in_both / present_poop) %>%
+  
+  mutate(perc_present_in_poop = present_poop/length(unique(filter(s, SampleType =="FACS")$SubjectID)) ) %>%
+  
+  left_join(props_temp_facs_per_population, by="Taxa") %>%
+  
+  merge(a, by.x="Taxa", by.y="row.names", all.x=T) %>%
+  rename(Name = y) %>%
+  mutate(Name = gsub("[pcofgs]__", "", Name)) %>%
+  
+  select(Taxa, Name, everything()) %>%
+
+  arrange(-perc_present_in_poop)
+
+
+ASVs_toTest <- props_temp_facs %>% filter(perc_present_in_poop >= 1/3) %>% pull(Taxa) %>% as.character() 
+```
+

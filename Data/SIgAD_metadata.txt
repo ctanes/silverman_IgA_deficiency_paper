@@ -1,0 +1,359 @@
+SampleID	SubjectID	SampleType	final_library_concentration_ng_ul	Household	Study_group	Analysis4	Population	include
+IDAHO.003.1	F03.1	Feces	5.2	F03	NA	Pos_Stool	NA	NA
+IDAHO.003.2	F03.2	Feces	11.5	F03	NA	Neg_Stool	NA	NA
+IDAHO.011.1	F11.1	Feces	15.49	F11	NA	Pos_Stool	NA	NA
+IDAHO.011.2	F11.2	Feces	8.28	F11	NA	Pos_Stool	NA	NA
+IDAHO.033.1	F33.1	Feces	12.54	F33	NA	Neg_Stool	NA	NA
+IDAHO.036.1	F36.1	Feces	10.29	F36	NA	Neg_Stool	NA	NA
+IDAHO.036.2	F36.2	Feces	8.2	F36	NA	Pos_Stool	NA	NA
+IDAHO.047.2	F47.2	Feces	9.82	F47	NA	Pos_Stool	NA	NA
+IDAHO.048.2	F48.2	Feces	9.75	F48	NA	Pos_Stool	NA	NA
+IDAHO.049.1	F49.1	Feces	4.84	F49	NA	Neg_Stool	NA	NA
+IDAHO.049.2	F49.2	Feces	13.07	F49	NA	Pos_Stool	NA	NA
+IDAHO.049.3	F49.3	Feces	10.6	F49	NA	Pos_Stool	NA	NA
+IDAHO.050.1	F50.1	Feces	10.01	F50	NA	Pos_Stool	NA	NA
+IDAHO.050.2	F50.2	Feces	7.31	F50	NA	Pos_Stool	NA	NA
+IDAHO.051.1	F51.1	Feces	9.1	F51	NA	Neg_Stool	NA	NA
+IDAHO.052.1	F52.1	Feces	9.38	F52	NA	Neg_Stool	NA	NA
+IDAHO.052.2	F52.2	Feces	10.95	F52	NA	Pos_Stool	NA	NA
+IDAHO.052.3	F52.3	Feces	8.64	F52	NA	Pos_Stool	NA	NA
+DNAfreewater2	NA	DNA-free water	0.04	NA	NA	NA	NA	no
+DNAfreewater3	NA	DNA-free water	0.07	NA	NA	NA	NA	no
+DNAfreewater4	NA	DNA-free water	0.04	NA	NA	NA	NA	no
+DNAfreewater5	NA	DNA-free water	0.04	NA	NA	NA	NA	no
+DNAfreewater6	NA	DNA-free water	0.08	NA	NA	NA	NA	no
+DNAfreewater7	NA	DNA-free water	0.08	NA	NA	NA	NA	no
+geneblock1	NA	Mock DNA	52.02	NA	NA	NA	NA	no
+geneblock2	NA	Mock DNA	40.07	NA	NA	NA	NA	no
+geneblock3	NA	Mock DNA	39.12	NA	NA	NA	NA	no
+geneblock4	NA	Mock DNA	39.4	NA	NA	NA	NA	no
+geneblock5	NA	Mock DNA	39.43	NA	NA	NA	NA	no
+geneblock6	NA	Mock DNA	35.53	NA	NA	NA	NA	no
+geneblock7	NA	Mock DNA	35.42	NA	NA	NA	NA	no
+I.03.1.GnAp.5	F03.1	FACS	13.16	F3	5A	Pos_Stool	IgA+IgG-	yes
+I.03.1.GnMp.5	F03.1	FACS	9.58	F3	5A	Pos_Stool	IgM+IgG-	yes
+I.03.1.GpAn.5	F03.1	FACS	11.36	F3	5A	Pos_Stool	IgG+IgA-	yes
+I.03.1.GpAp.5	F03.1	FACS	9.79	F3	5A	Pos_Stool	IgG+IgA+	yes
+I.03.1.GpMn.5	F03.1	FACS	7.85	F3	5A	Pos_Stool	IgG+IgM-	yes
+I.03.1.GpMp.5	F03.1	FACS	12.62	F3	5A	Pos_Stool	IgG+IgM+	yes
+I.03.1.MnAp.4	F03.1	FACS	10.75	F3	4A	Pos_Stool	IgA+IgM-	yes
+I.03.1.MpAn.4	F03.1	FACS	6.82	F3	4A	Pos_Stool	IgM+IgA-	yes
+I.03.1.MpAp.4	F03.1	FACS	3.91	F3	4A	Pos_Stool	IgM+IgA+	yes
+I.03.1.Neg.4	F03.1	FACS	0.92	F3	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.03.1.Neg.5	F03.1	FACS	5.34	F3	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.03.2.GnMp.5	F03.2	FACS	16.73	F3	5A	Neg_Stool	IgM+IgG-	yes
+I.03.2.GpMn.5	F03.2	FACS	15.14	F3	5A	Neg_Stool	IgG+IgM-	yes
+I.03.2.GpMp.5	F03.2	FACS	11.05	F3	5A	Neg_Stool	IgG+IgM+	yes
+I.03.2.MpAn.4	F03.2	FACS	6.63	F3	4A	Neg_Stool	IgM+IgA-	yes
+I.03.2.Neg.4	F03.2	FACS	7.32	F3	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.03.2.Neg.5	F03.2	FACS	10.68	F3	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.11.1.GnMp.5	F11.1	FACS	13.2	F11	5A	Pos_Stool	IgM+IgG-	no
+I.11.1.GpMp.5	F11.1	FACS	11.45	F11	5A	Pos_Stool	IgG+IgM+	no
+I.11.1.MpAn.4	F11.1	FACS	4.33	F11	4A	Pos_Stool	IgM+IgA-	no
+I.11.1.Neg.4	F11.1	FACS	6.28	F11	4A	Pos_Stool	IgA-IgM-IgG-	no
+I.11.1.Neg.5	F11.1	FACS	9.24	F11	5A	Pos_Stool	IgA-IgM-IgG-	no
+I.11.2.GnAp.5	F11.2	FACS	11.73	F11	5A	Pos_Stool	IgA+IgG-	no
+I.11.2.GpAn.5	F11.2	FACS	15.83	F11	5A	Pos_Stool	IgG+IgA-	no
+I.11.2.GpAp.5	F11.2	FACS	10.72	F11	5A	Pos_Stool	IgG+IgA+	no
+I.11.2.GpMp.5	F11.2	FACS	14.72	F11	5A	Pos_Stool	IgG+IgM+	no
+I.11.2.MnAp.4	F11.2	FACS	4.01	F11	4A	Pos_Stool	IgA+IgM-	no
+I.11.2.MpAn.4	F11.2	FACS	7.32	F11	4A	Pos_Stool	IgM+IgA-	no
+I.11.2.MpAp.4	F11.2	FACS	11.31	F11	4A	Pos_Stool	IgM+IgA+	no
+I.11.2.Neg.4	F11.2	FACS	4.81	F11	4A	Pos_Stool	IgA-IgM-IgG-	no
+I.11.2.Neg.5	F11.2	FACS	9.74	F11	5A	Pos_Stool	IgA-IgM-IgG-	no
+I.47.1.GnMp.5	F47.1	FACS	9.28	F47	5A	Neg_Stool	IgM+IgG-	yes
+I.47.1.GpMn.5	F47.1	FACS	7.32	F47	5A	Neg_Stool	IgG+IgM-	yes
+I.47.1.GpMp.5	F47.1	FACS	9.55	F47	5A	Neg_Stool	IgG+IgM+	yes
+I.47.1.MpAn.4	F47.1	FACS	11.21	F47	4A	Neg_Stool	IgM+IgA-	yes
+I.47.1.Neg.4	F47.1	FACS	5.36	F47	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.47.1.Neg.5	F47.1	FACS	8.59	F47	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.47.2.GnAp.5	F47.2	FACS	1.89	F47	5A	Pos_Stool	IgA+IgG-	yes
+I.47.2.GnMp.5	F47.2	FACS	7.36	F47	5A	Pos_Stool	IgM+IgG-	yes
+I.47.2.GpAn.5	F47.2	FACS	5.28	F47	5A	Pos_Stool	IgG+IgA-	yes
+I.47.2.GpAp.5	F47.2	FACS	11.29	F47	5A	Pos_Stool	IgG+IgA+	yes
+I.47.2.GpMn.5	F47.2	FACS	7.05	F47	5A	Pos_Stool	IgG+IgM-	yes
+I.47.2.GpMp.5	F47.2	FACS	9.26	F47	5A	Pos_Stool	IgG+IgM+	yes
+I.47.2.MnAp.4	F47.2	FACS	6.94	F47	4A	Pos_Stool	IgA+IgM-	yes
+I.47.2.MpAn.4	F47.2	FACS	2.2	F47	4A	Pos_Stool	IgM+IgA-	yes
+I.47.2.MpAp.4	F47.2	FACS	2.95	F47	4A	Pos_Stool	IgM+IgA+	yes
+I.47.2.Neg.4	F47.2	FACS	5.41	F47	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.47.2.Neg.5	F47.2	FACS	10.03	F47	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.48.1.GnMp.5	F48.1	FACS	8.83	F48	5A	Neg_Stool	IgM+IgG-	yes
+I.48.1.GpMn.5	F48.1	FACS	11.47	F48	5A	Neg_Stool	IgG+IgM-	yes
+I.48.1.GpMp.5	F48.1	FACS	4.37	F48	5A	Neg_Stool	IgG+IgM+	yes
+I.48.1.MpAn.4	F48.1	FACS	1.94	F48	4A	Neg_Stool	IgM+IgA-	yes
+I.48.1.Neg.4	F48.1	FACS	5.62	F48	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.48.1.Neg.5	F48.1	FACS	6.9	F48	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.48.2.GnAp.5	F48.2	FACS	9.03	F48	5A	Pos_Stool	IgA+IgG-	yes
+I.48.2.GnMp.5	F48.2	FACS	12.44	F48	5A	Pos_Stool	IgM+IgG-	yes
+I.48.2.GpAn.5	F48.2	FACS	12.61	F48	5A	Pos_Stool	IgG+IgA-	yes
+I.48.2.GpAp.5	F48.2	FACS	14.76	F48	5A	Pos_Stool	IgG+IgA+	yes
+I.48.2.GpMp.5	F48.2	FACS	7.44	F48	5A	Pos_Stool	IgG+IgM+	yes
+I.48.2.MnAp.4	F48.2	FACS	5.23	F48	4A	Pos_Stool	IgA+IgM-	yes
+I.48.2.MpAn.4	F48.2	FACS	12.99	F48	4A	Pos_Stool	IgM+IgA-	yes
+I.48.2.MpAp.4	F48.2	FACS	12.23	F48	4A	Pos_Stool	IgM+IgA+	yes
+I.48.2.Neg.4	F48.2	FACS	14.92	F48	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.48.2.Neg.5	F48.2	FACS	11.09	F48	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.49.1.GnMp.5	F49.1	FACS	17.67	F49	5A	Neg_Stool	IgM+IgG-	yes
+I.49.1.GpMn.5	F49.1	FACS	8.85	F49	5A	Neg_Stool	IgG+IgM-	yes
+I.49.1.GpMp.5	F49.1	FACS	2.34	F49	5A	Neg_Stool	IgG+IgM+	yes
+I.49.1.MpAn.4	F49.1	FACS	13.27	F49	4A	Neg_Stool	IgM+IgA-	yes
+I.49.1.Neg.4	F49.1	FACS	15.39	F49	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.49.1.Neg.5	F49.1	FACS	11.05	F49	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.49.2.GnAp.5	F49.2	FACS	3.36	F49	5A	Pos_Stool	IgA+IgG-	yes
+I.49.2.GnMp.5	F49.2	FACS	22.39	F49	5A	Pos_Stool	IgM+IgG-	yes
+I.49.2.GpAn.5	F49.2	FACS	15.26	F49	5A	Pos_Stool	IgG+IgA-	yes
+I.49.2.GpAp.5	F49.2	FACS	14.1	F49	5A	Pos_Stool	IgG+IgA+	yes
+I.49.2.GpMn.5	F49.2	FACS	8.73	F49	5A	Pos_Stool	IgG+IgM-	yes
+I.49.2.GpMp.5	F49.2	FACS	1.27	F49	5A	Pos_Stool	IgG+IgM+	yes
+I.49.2.MnAp.4	F49.2	FACS	5.94	F49	4A	Pos_Stool	IgA+IgM-	yes
+I.49.2.MpAn.4	F49.2	FACS	18	F49	4A	Pos_Stool	IgM+IgA-	yes
+I.49.2.MpAp.4	F49.2	FACS	17.75	F49	4A	Pos_Stool	IgM+IgA+	yes
+I.49.2.Neg.4	F49.2	FACS	16.77	F49	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.49.2.Neg.5	F49.2	FACS	16.77	F49	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.49.3.GnAp.5	F49.3	FACS	8.47	F49	5A	Pos_Stool	IgA+IgG-	yes
+I.49.3.GnMp.5	F49.3	FACS	9.13	F49	5A	Pos_Stool	IgM+IgG-	yes
+I.49.3.GpAn.5	F49.3	FACS	13.9	F49	5A	Pos_Stool	IgG+IgA-	yes
+I.49.3.GpAp.5	F49.3	FACS	13.56	F49	5A	Pos_Stool	IgG+IgA+	yes
+I.49.3.GpMn.5	F49.3	FACS	1.51	F49	5A	Pos_Stool	IgG+IgM-	yes
+I.49.3.GpMp.5	F49.3	FACS	7.93	F49	5A	Pos_Stool	IgG+IgM+	yes
+I.49.3.MnAp.4	F49.3	FACS	15.62	F49	4A	Pos_Stool	IgA+IgM-	yes
+I.49.3.MpAn.4	F49.3	FACS	14.13	F49	4A	Pos_Stool	IgM+IgA-	yes
+I.49.3.MpAp.4	F49.3	FACS	7.13	F49	4A	Pos_Stool	IgM+IgA+	yes
+I.49.3.Neg.4	F49.3	FACS	9.08	F49	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.49.3.Neg.5	F49.3	FACS	12.48	F49	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.50.1.GnAp.5	F50.1	FACS	3.81	F50	5A	Pos_Stool	IgA+IgG-	yes
+I.50.1.GnMp.5	F50.1	FACS	3.4	F50	5A	Pos_Stool	IgM+IgG-	yes
+I.50.1.GpAn.5	F50.1	FACS	6.91	F50	5A	Pos_Stool	IgG+IgA-	yes
+I.50.1.GpAp.5	F50.1	FACS	3.3	F50	5A	Pos_Stool	IgG+IgA+	yes
+I.50.1.GpMp.5	F50.1	FACS	5.68	F50	5A	Pos_Stool	IgG+IgM+	yes
+I.50.1.MnAp.4	F50.1	FACS	3.42	F50	4A	Pos_Stool	IgA+IgM-	yes
+I.50.1.MpAn.4	F50.1	FACS	12.63	F50	4A	Pos_Stool	IgM+IgA-	yes
+I.50.1.MpAp.4	F50.1	FACS	13.74	F50	4A	Pos_Stool	IgM+IgA+	yes
+I.50.1.Neg.4	F50.1	FACS	0.63	F50	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.50.1.Neg.5	F50.1	FACS	0.29	F50	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.50.2.GnAp.5	F50.2	FACS	0.83	F50	5A	Pos_Stool	IgA+IgG-	yes
+I.50.2.GnMp.5	F50.2	FACS	14.02	F50	5A	Pos_Stool	IgM+IgG-	yes
+I.50.2.GpAp.5	F50.2	FACS	9.88	F50	5A	Pos_Stool	IgG+IgA+	yes
+I.50.2.GpMn.5	F50.2	FACS	4.62	F50	5A	Pos_Stool	IgG+IgM-	yes
+I.50.2.GpMp.5	F50.2	FACS	12.65	F50	5A	Pos_Stool	IgG+IgM+	yes
+I.50.2.MnAp.4	F50.2	FACS	12.58	F50	4A	Pos_Stool	IgA+IgM-	yes
+I.50.2.MpAn.4	F50.2	FACS	10.16	F50	4A	Pos_Stool	IgM+IgA-	yes
+I.50.2.MpAp.4	F50.2	FACS	17.23	F50	4A	Pos_Stool	IgM+IgA+	yes
+I.50.2.Neg.4	F50.2	FACS	1.01	F50	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.50.2.Neg.5	F50.2	FACS	0.65	F50	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.51.1.GnMp.5	F51.1	FACS	11.55	F51	5A	Neg_Stool	IgM+IgG-	yes
+I.51.1.GpMn.5	F51.1	FACS	11.48	F51	5A	Neg_Stool	IgG+IgM-	yes
+I.51.1.GpMp.5	F51.1	FACS	13.38	F51	5A	Neg_Stool	IgG+IgM+	yes
+I.51.1.MpAn.4	F51.1	FACS	12.26	F51	4A	Neg_Stool	IgM+IgA-	yes
+I.51.1.Neg.4	F51.1	FACS	3.75	F51	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.51.1.Neg.5	F51.1	FACS	12.74	F51	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.51.2.GnAp.5	F51.2	FACS	8.74	F51	5A	Pos_Stool	IgA+IgG-	yes
+I.51.2.GnMp.5	F51.2	FACS	5.64	F51	5A	Pos_Stool	IgM+IgG-	yes
+I.51.2.GpAn.5	F51.2	FACS	4.29	F51	5A	Pos_Stool	IgG+IgA-	yes
+I.51.2.GpAp.5	F51.2	FACS	8.08	F51	5A	Pos_Stool	IgG+IgA+	yes
+I.51.2.GpMp.5	F51.2	FACS	8.46	F51	5A	Pos_Stool	IgG+IgM+	yes
+I.51.2.MnAp.4	F51.2	FACS	4.02	F51	4A	Pos_Stool	IgA+IgM-	yes
+I.51.2.MpAn.4	F51.2	FACS	0.41	F51	4A	Pos_Stool	IgM+IgA-	yes
+I.51.2.MpAp.4	F51.2	FACS	7.81	F51	4A	Pos_Stool	IgM+IgA+	yes
+I.51.2.Neg.4	F51.2	FACS	11.41	F51	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.51.2.Neg.5	F51.2	FACS	6.42	F51	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.52.1.GnMp.5	F52.1	FACS	7.61	F52	5A	Neg_Stool	IgM+IgG-	yes
+I.52.1.GpMp.5	F52.1	FACS	5	F52	5A	Neg_Stool	IgG+IgM+	yes
+I.52.1.MpAn.4	F52.1	FACS	7.19	F52	4A	Neg_Stool	IgM+IgA-	yes
+I.52.1.Neg.4	F52.1	FACS	1.03	F52	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.52.1.Neg.5	F52.1	FACS	2.96	F52	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.52.2.GnAp.5	F52.2	FACS	9.28	F52	5A	Pos_Stool	IgA+IgG-	yes
+I.52.2.GnMp.5	F52.2	FACS	9.79	F52	5A	Pos_Stool	IgM+IgG-	yes
+I.52.2.GpAn.5	F52.2	FACS	2.7	F52	5A	Pos_Stool	IgG+IgA-	yes
+I.52.2.GpAp.5	F52.2	FACS	5.31	F52	5A	Pos_Stool	IgG+IgA+	yes
+I.52.2.GpMn.5	F52.2	FACS	8.94	F52	5A	Pos_Stool	IgG+IgM-	yes
+I.52.2.GpMp.5	F52.2	FACS	11	F52	5A	Pos_Stool	IgG+IgM+	yes
+I.52.2.MnAp.4	F52.2	FACS	11.15	F52	4A	Pos_Stool	IgA+IgM-	yes
+I.52.2.MpAn.4	F52.2	FACS	7.92	F52	4A	Pos_Stool	IgM+IgA-	yes
+I.52.2.MpAp.4	F52.2	FACS	13.25	F52	4A	Pos_Stool	IgM+IgA+	yes
+I.52.2.Neg.4	F52.2	FACS	8.65	F52	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.52.2.Neg.5	F52.2	FACS	5.69	F52	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.52.3.GnMp.5	F52.3	FACS	10.16	F52	5A	Pos_Stool	IgM+IgG-	yes
+I.52.3.GpMn.5	F52.3	FACS	7.11	F52	5A	Pos_Stool	IgG+IgM-	yes
+I.52.3.GpMp.5	F52.3	FACS	6.83	F52	5A	Pos_Stool	IgG+IgM+	yes
+I.52.3.MnAp.4	F52.3	FACS	9.54	F52	4A	Pos_Stool	IgA+IgM-	yes
+I.52.3.MpAn.4	F52.3	FACS	8.14	F52	4A	Pos_Stool	IgM+IgA-	yes
+I.52.3.MpAp.4	F52.3	FACS	5.85	F52	4A	Pos_Stool	IgM+IgA+	yes
+I.52.3.Neg.4	F52.3	FACS	0.99	F52	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.52.3.Neg.5	F52.3	FACS	14.89	F52	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.54.1.GnMp.5	F54.1	FACS	8.91	F54	5A	Neg_Stool	IgM+IgG-	yes
+I.54.1.GpMn.5	F54.1	FACS	12.08	F54	5A	Neg_Stool	IgG+IgM-	yes
+I.54.1.GpMp.5	F54.1	FACS	12.63	F54	5A	Neg_Stool	IgG+IgM+	yes
+I.54.1.MpAn.4	F54.1	FACS	9.82	F54	4A	Neg_Stool	IgM+IgA-	yes
+I.54.1.Neg.4	F54.1	FACS	8.22	F54	4A	Neg_Stool	IgA-IgM-IgG-	yes
+I.54.1.Neg.5	F54.1	FACS	8.15	F54	5A	Neg_Stool	IgA-IgM-IgG-	yes
+I.54.2.GnAp.5	F54.2	FACS	3.85	F54	5A	Pos_Stool	IgA+IgG-	yes
+I.54.2.GnMp.5	F54.2	FACS	12.56	F54	5A	Pos_Stool	IgM+IgG-	yes
+I.54.2.GpMp.5	F54.2	FACS	14.3	F54	5A	Pos_Stool	IgG+IgM+	yes
+I.54.2.MnAp.4	F54.2	FACS	9.8	F54	4A	Pos_Stool	IgA+IgM-	yes
+I.54.2.MpAn.4	F54.2	FACS	8.82	F54	4A	Pos_Stool	IgM+IgA-	yes
+I.54.2.MpAp.4	F54.2	FACS	10.84	F54	4A	Pos_Stool	IgM+IgA+	yes
+I.54.2.Neg.4	F54.2	FACS	0.78	F54	4A	Pos_Stool	IgA-IgM-IgG-	yes
+I.54.2.Neg.5	F54.2	FACS	4.43	F54	5A	Pos_Stool	IgA-IgM-IgG-	yes
+I.59.1.GnMp.5	F59.1	FACS	8.41	F59	5A	Neg_Stool	IgM+IgG-	no
+I.59.1.GpMp.5	F59.1	FACS	9.2	F59	5A	Neg_Stool	IgG+IgM+	no
+I.59.1.MpAn.4	F59.1	FACS	3.61	F59	4A	Neg_Stool	IgM+IgA-	no
+I.59.1.Neg.4	F59.1	FACS	0.83	F59	4A	Neg_Stool	IgA-IgM-IgG-	no
+I.59.1.Neg.5	F59.1	FACS	0.85	F59	5A	Neg_Stool	IgA-IgM-IgG-	no
+I.59.2.GnMp.5	F59.2	FACS	2.57	F59	5A	Neg_Stool	IgM+IgG-	no
+I.59.2.GpMp.5	F59.2	FACS	13.52	F59	5A	Neg_Stool	IgG+IgM+	no
+I.59.2.MpAn.4	F59.2	FACS	2.22	F59	4A	Neg_Stool	IgM+IgA-	no
+I.59.2.Neg.4	F59.2	FACS	3.77	F59	4A	Neg_Stool	IgA-IgM-IgG-	no
+I.59.2.Neg.5	F59.2	FACS	1.58	F59	5A	Neg_Stool	IgA-IgM-IgG-	no
+I.63.1.GnMp.5	F63.1	FACS	11.55	F63	5A	Neg_Stool	IgM+IgG-	no
+I.63.1.GpMp.5	F63.1	FACS	12.09	F63	5A	Neg_Stool	IgG+IgM+	no
+I.63.1.MpAn.4	F63.1	FACS	11.01	F63	4A	Neg_Stool	IgM+IgA-	no
+I.63.1.Neg.4	F63.1	FACS	6.19	F63	4A	Neg_Stool	IgA-IgM-IgG-	no
+I.63.1.Neg.5	F63.1	FACS	7.41	F63	5A	Neg_Stool	IgA-IgM-IgG-	no
+I.63.2.GnAp.5	F63.2	FACS	6.31	F63	5A	Pos_Stool	IgA+IgG-	no
+I.63.2.GnMp.5	F63.2	FACS	6.86	F63	5A	Pos_Stool	IgM+IgG-	no
+I.63.2.GpAp.5	F63.2	FACS	7.49	F63	5A	Pos_Stool	IgG+IgA+	no
+I.63.2.GpMp.5	F63.2	FACS	7.94	F63	5A	Pos_Stool	IgG+IgM+	no
+I.63.2.MnAp.4	F63.2	FACS	7.12	F63	4A	Pos_Stool	IgA+IgM-	no
+I.63.2.MpAn.4	F63.2	FACS	6.16	F63	4A	Pos_Stool	IgM+IgA-	no
+I.63.2.MpAp.4	F63.2	FACS	14.48	F63	4A	Pos_Stool	IgM+IgA+	no
+I.63.2.Neg.4	F63.2	FACS	3.64	F63	4A	Pos_Stool	IgA-IgM-IgG-	no
+I.63.2.Neg.5	F63.2	FACS	9.74	F63	5A	Pos_Stool	IgA-IgM-IgG-	no
+I.E.03	NA	SLP Control	4.61	F3	NA	NA	NA	no
+I.E.11	NA	SLP Control	0.11	F11	NA	NA	NA	no
+I.E.14	NA	SLP Control	8.24	F14	NA	NA	NA	no
+I.E.33	NA	SLP Control	8.25	F33	NA	NA	NA	no
+I.E.36	NA	SLP Control	1.86	F36	NA	NA	NA	no
+I.E.46	NA	SLP Control	0.74	NA	NA	NA	NA	no
+I.E.48	NA	SLP Control	0.11	NA	NA	NA	NA	no
+I.E.49	NA	SLP Control	0.05	NA	NA	NA	NA	no
+I.E.50	NA	SLP Control	0.17	NA	NA	NA	NA	no
+I.E.52	S52	SLP Control	0.14	NA	NA	NA	NA	no
+I.E.54	S54	SLP Control	0.12	NA	NA	NA	NA	no
+I.E.59	S59	SLP Control	0.08	NA	NA	NA	NA	no
+I.E.63	S63	SLP Control	0.09	NA	NA	NA	NA	no
+I.S.03	NA	Sheath	3.84	F3	NA	NA	NA	no
+I.S.11	NA	Sheath	0.16	F11	NA	NA	NA	no
+I.S.14	NA	Sheath	7.47	F14	NA	NA	NA	no
+I.S.33	NA	Sheath	4.12	F33	NA	NA	NA	no
+I.S.36	NA	Sheath	6.17	F36	NA	NA	NA	no
+I.S.46	NA	Sheath	6.66	NA	NA	NA	NA	no
+I.S.47	NA	Sheath	0.14	F47	NA	NA	NA	no
+I.S.48	NA	Sheath	6.88	F48	NA	NA	NA	no
+I.S.49	NA	Sheath	0.23	F49	NA	NA	NA	no
+I.S.50	NA	Sheath	0.13	F50	NA	NA	NA	no
+I.S.51	NA	Sheath	0.34	F51	NA	NA	NA	no
+I.S.52	NA	Sheath	0.18	F52	NA	NA	NA	no
+I.S.54	NA	Sheath	0.11	F54	NA	NA	NA	no
+I.S.59	NA	Sheath	0.11	NA	NA	NA	NA	no
+I.S.63	NA	Sheath	0.06	F63	NA	NA	NA	no
+IDAHO.014.1	F14.1	Feces	32.6	F14	NA	Neg_Stool	NA	no
+IDAHO.014.2	F14.2	Feces	40.25	F14	NA	Neg_Stool	NA	no
+IDAHO.033.2	F33.2	Feces	25.12	F33	NA	Pos_Stool	NA	no
+IDAHO.046.1	F46.1	Feces	32.78	F46	NA	Neg_Stool	NA	no
+IDAHO.046.2	F46.2	Feces	42.48	F46	NA	Pos_Stool	NA	no
+IDAHO.047.1	F47.1	Feces	15.76	F47	NA	Neg_Stool	NA	no
+IDAHO.048.1	F48.1	Feces	33.57	F48	NA	Neg_Stool	NA	no
+IDAHO.051.2	F51.2	Feces	38.19	F51	NA	Pos_Stool	NA	no
+IDAHO.054.1	F54.1	Feces	37.11	F54	NA	Neg_Stool	NA	no
+IDAHO.054.2	F54.2	Feces	33.82	F54	NA	Pos_Stool	NA	no
+IDAHO.059.1	F59.1	Feces	33.93	F59	NA	Neg_Stool	NA	no
+IDAHO.059.2	F59.2	Feces	38.41	F59	NA	Neg_Stool	NA	no
+IDAHO.063.1	F63.1	Feces	34.26	F63	NA	Neg_Stool	NA	no
+IDAHO.063.2	F63.2	Feces	40.12	F63	NA	Pos_Stool	NA	no
+DNAfreewater1	NA	NA	NA	NA	NA	NA	NA	NA
+EC11	NA	Lab water	NA	NA	NA	NA	NA	no
+EC33	NA	Lab water	NA	NA	NA	NA	NA	no
+EC36	NA	Lab water	NA	NA	NA	NA	NA	no
+EC46	NA	Lab water	NA	NA	NA	NA	NA	no
+EC63	NA	Lab water	NA	NA	NA	NA	NA	no
+IDAHO001	F36.1	FACS	NA	F36	4A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO002	F36.1	FACS	NA	F36	4A	Neg_Stool	IgM+IgA-	yes
+IDAHO003	F36.1	FACS	NA	F36	5A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO004	F36.1	FACS	NA	F36	5A	Neg_Stool	IgG+IgM-	yes
+IDAHO005	F36.1	FACS	NA	F36	5A	Neg_Stool	IgG+IgM+	yes
+IDAHO006	F36.1	FACS	NA	F36	5A	Neg_Stool	IgM+IgG-	yes
+IDAHO007	F36.2	FACS	NA	F36	4A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO008	F36.2	FACS	NA	F36	4A	Pos_Stool	IgM+IgA-	yes
+IDAHO009	F36.2	FACS	NA	F36	4A	Pos_Stool	IgM+IgA+	yes
+IDAHO010	F36.2	FACS	NA	F36	4A	Pos_Stool	IgA+IgM-	yes
+IDAHO011	F36.2	FACS	NA	F36	5A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO012	F36.2	FACS	NA	F36	5A	Pos_Stool	IgG+IgM+	yes
+IDAHO013	F36.2	FACS	NA	F36	5A	Pos_Stool	IgM+IgG-	yes
+IDAHO014	F36.2	FACS	NA	F36	5A	Pos_Stool	IgG+IgA+	yes
+IDAHO015	F36.2	FACS	NA	F36	5A	Pos_Stool	IgA+IgG-	yes
+IDAHO016	F11.1	FACS	NA	F11	4A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO017	F11.1	FACS	NA	F11	4A	Pos_Stool	IgM+IgA-	yes
+IDAHO018	F11.1	FACS	NA	F11	5A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO019	F11.1	FACS	NA	F11	5A	Pos_Stool	IgG+IgM+	yes
+IDAHO020	F11.1	FACS	NA	F11	5A	Pos_Stool	IgM+IgG-	yes
+IDAHO021	F11.2	FACS	NA	F11	4A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO022	F11.2	FACS	NA	F11	4A	Pos_Stool	IgM+IgA-	yes
+IDAHO023	F11.2	FACS	NA	F11	4A	Pos_Stool	IgM+IgA+	yes
+IDAHO024	F11.2	FACS	NA	F11	4A	Pos_Stool	IgA+IgM-	yes
+IDAHO025	F11.2	FACS	NA	F11	5A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO026	F11.2	FACS	NA	F11	5A	Pos_Stool	IgG+IgM+	yes
+IDAHO027	F11.2	FACS	NA	F11	5A	Pos_Stool	IgM+IgG-	yes
+IDAHO028	F11.2	FACS	NA	F11	5A	Pos_Stool	IgA+IgG-	yes
+IDAHO045	F33.1	FACS	NA	F33	4A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO046	F33.1	FACS	NA	F33	4A	Neg_Stool	IgM+IgA-	yes
+IDAHO047	F33.1	FACS	NA	F33	5A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO048	F33.1	FACS	NA	F33	5A	Neg_Stool	IgG+IgM-	yes
+IDAHO049	F33.1	FACS	NA	F33	5A	Neg_Stool	IgG+IgM+	yes
+IDAHO050	F33.1	FACS	NA	F33	5A	Neg_Stool	IgM+IgG-	yes
+IDAHO051	F33.2	FACS	NA	F33	4A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO052	F33.2	FACS	NA	F33	4A	Pos_Stool	IgM+IgA-	yes
+IDAHO053	F33.2	FACS	NA	F33	4A	Pos_Stool	IgM+IgA+	yes
+IDAHO054	F33.2	FACS	NA	F33	4A	Pos_Stool	IgA+IgM-	yes
+IDAHO055	F33.2	FACS	NA	F33	5A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO056	F33.2	FACS	NA	F33	5A	Pos_Stool	IgG+IgM+	yes
+IDAHO057	F33.2	FACS	NA	F33	5A	Pos_Stool	IgM+IgG-	yes
+IDAHO058	F33.2	FACS	NA	F33	5A	Pos_Stool	IgG+IgA+	yes
+IDAHO059	F33.2	FACS	NA	F33	5A	Pos_Stool	IgA+IgG-	yes
+IDAHO060	F63.1	FACS	NA	F63	4A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO061	F63.1	FACS	NA	F63	4A	Neg_Stool	IgM+IgA-	yes
+IDAHO062	F63.1	FACS	NA	F63	5A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO063	F63.1	FACS	NA	F63	5A	Neg_Stool	IgG+IgM-	yes
+IDAHO064	F63.1	FACS	NA	F63	5A	Neg_Stool	IgG+IgM+	yes
+IDAHO065	F63.1	FACS	NA	F63	5A	Neg_Stool	IgM+IgG-	yes
+IDAHO066	F63.2	FACS	NA	F63	4A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO067	F63.2	FACS	NA	F63	4A	Pos_Stool	IgM+IgA-	yes
+IDAHO068	F63.2	FACS	NA	F63	4A	Pos_Stool	IgM+IgA+	yes
+IDAHO069	F63.2	FACS	NA	F63	4A	Pos_Stool	IgA+IgM-	yes
+IDAHO070	F63.2	FACS	NA	F63	5A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO071	F63.2	FACS	NA	F63	5A	Pos_Stool	IgG+IgM+	yes
+IDAHO072	F63.2	FACS	NA	F63	5A	Pos_Stool	IgM+IgG-	yes
+IDAHO073	F63.2	FACS	NA	F63	5A	Pos_Stool	IgG+IgA+	yes
+IDAHO074	F63.2	FACS	NA	F63	5A	Pos_Stool	IgA+IgG-	yes
+IDAHO081	F59.1	FACS	NA	F59	4A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO082	F59.1	FACS	NA	F59	4A	Neg_Stool	IgM+IgA-	yes
+IDAHO083	F59.1	FACS	NA	F59	5A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO084	F59.1	FACS	NA	F59	5A	Neg_Stool	IgG+IgM+	yes
+IDAHO085	F59.1	FACS	NA	F59	5A	Neg_Stool	IgM+IgG-	yes
+IDAHO086	F59.2	FACS	NA	F59	4A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO087	F59.2	FACS	NA	F59	4A	Neg_Stool	IgM+IgA-	yes
+IDAHO088	F59.2	FACS	NA	F59	5A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO089	F59.2	FACS	NA	F59	5A	Neg_Stool	IgG+IgM+	yes
+IDAHO090	F59.2	FACS	NA	F59	5A	Neg_Stool	IgM+IgG-	yes
+IDAHO094	F46.1	FACS	NA	F46	4A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO095	F46.1	FACS	NA	F46	4A	Neg_Stool	IgM+IgA-	yes
+IDAHO096	F46.1	FACS	NA	F46	5A	Neg_Stool	IgA-IgM-IgG-	yes
+IDAHO097	F46.1	FACS	NA	F46	5A	Neg_Stool	IgG+IgM-	yes
+IDAHO098	F46.1	FACS	NA	F46	5A	Neg_Stool	IgG+IgM+	yes
+IDAHO099	F46.1	FACS	NA	F46	5A	Neg_Stool	IgM+IgG-	yes
+IDAHO100	F46.2	FACS	NA	F46	4A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO101	F46.2	FACS	NA	F46	4A	Pos_Stool	IgM+IgA-	yes
+IDAHO102	F46.2	FACS	NA	F46	4A	Pos_Stool	IgM+IgA+	yes
+IDAHO103	F46.2	FACS	NA	F46	4A	Pos_Stool	IgA+IgM-	yes
+IDAHO104	F46.2	FACS	NA	F46	5A	Pos_Stool	IgA-IgM-IgG-	yes
+IDAHO105	F46.2	FACS	NA	F46	5A	Pos_Stool	IgG+IgM+	yes
+IDAHO106	F46.2	FACS	NA	F46	5A	Pos_Stool	IgM+IgG-	yes
+IDAHO107	F46.2	FACS	NA	F46	5A	Pos_Stool	IgG+IgA+	yes
+IDAHO108	F46.2	FACS	NA	F46	5A	Pos_Stool	IgA+IgG-	yes
+PS11	NA	Sheath fluid	NA	NA	NA	NA	NA	no
+PS33	NA	Sheath fluid	NA	NA	NA	NA	NA	no
+PS36	NA	Sheath fluid	NA	NA	NA	NA	NA	no
+PS46	NA	Sheath fluid	NA	NA	NA	NA	NA	no
+PS59	NA	Sheath fluid	NA	NA	NA	NA	NA	no
+PS63	NA	Sheath fluid	NA	NA	NA	NA	NA	no
