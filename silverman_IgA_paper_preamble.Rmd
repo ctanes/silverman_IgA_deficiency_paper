@@ -220,3 +220,7 @@ props_temp_facs <- props_temp %>%
 ASVs_toTest <- props_temp_facs %>% filter(perc_present_in_poop >= 1/3) %>% pull(Taxa) %>% as.character() 
 ```
 
+```{r}
+ASV_seqs <- read.delim(file.path(data_dir, "ASV_sequences.txt")) %>%
+  rename(SNV=ASV)
+```

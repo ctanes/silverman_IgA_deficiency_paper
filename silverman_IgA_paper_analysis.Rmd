@@ -397,6 +397,8 @@ temp <- props_temp_feces %>%
 
 data_toPlot %>%
   left_join(temp, by="SNV") %>%  
+  left_join(ASV_seqs, by="SNV") %>%
+  select(Taxa, SNV, Name, seq, everything()) %>%
   write.table("silverman_Fig1C_data.txt", sep='\t', row.names=F, quote=F)
 
 data_toPlot %>%
