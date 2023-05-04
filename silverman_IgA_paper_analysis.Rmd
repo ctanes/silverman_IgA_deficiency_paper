@@ -201,8 +201,8 @@ pander(table(s_toTest$Population), caption = "Total number of populations sequen
 library(readr)
 ## read in IgApos and IgAneg fraction data
 fraction_data <- read_delim(file.path(data_dir, "IgA_IgM_fraction_data.txt"), delim='\t') %>%
-  mutate(SubjectID = paste0("F", SubjectID)) %>%
-  mutate(SubjectID = sub("-", ".", SubjectID)) %>%
+  #mutate(SubjectID = paste0("F", SubjectID)) %>%
+  #mutate(SubjectID = sub("-", ".", SubjectID)) %>%
   gather("pop", "fraction", -SubjectID, -study_group) %>%
   separate(pop, into=c("Study_group", "Population"), sep=" ") %>%
   
@@ -540,8 +540,8 @@ s_toTest %>%
 library(readr)
 ## read in IgApos and IgAneg fraction data
 fraction_data <- read_delim(file.path(data_dir, "IgG_IgM_fraction_data.txt"), delim='\t') %>%
-  mutate(SubjectID = paste0("F", SubjectID)) %>%
-  mutate(SubjectID = sub("-", ".", SubjectID)) %>%
+  #mutate(SubjectID = paste0("F", SubjectID)) %>%
+  #mutate(SubjectID = sub("-", ".", SubjectID)) %>%
   gather("pop", "fraction", -SubjectID, -study_group) %>%
   separate(pop, into=c("Study_group", "Population"), sep=" ") %>%
   

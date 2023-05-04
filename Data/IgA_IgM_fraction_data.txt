@@ -1,33 +1,33 @@
 SubjectID	study_group	Sort_4A IgA-IgM-IgG-	Sort_4A IgA+IgM-	Sort_4A IgM+IgA+	Sort_4A IgM+IgA-
-03-2	Case	60			15
-14-1	Case	52			18
-14-2	Case	48	6	11.5	18
-33-1	Case	75			13.7
-36-1	Case	70			18.5
-46-1	Case	60			30
-47-1	Case	60			15.1
-48-1	Case	60			26.2
-49-1	Case	42			15
-51-1	Case	65			21
-52-1	Case	70			18
-54-1	Case	60			21.1
-59-1	Case	60			30
-59-2	Case	36			20
-63-1	Case	65			28
-03-1	Control	40	27	18	9.8
-11-1	Control	75			24
-11-2	Control	45	22	16	8
-33-2	Control	45	15	14	19
-36-2	Control	50	7.8	16.7	9
-46-2	Control	40	4	22	16
-47-2	Control	50	4.5	17.7	12
-48-2	Control	65	1.2	5.8	12.5
-49-2	Control	50	13	7.8	13.5
-49-3	Control	49	54.6	10	18
-50-1	Control	50	11	16	13.2
-50-2	Control	40	29.5	16.5	4.7
-51-2	Control	50	7.5	19	15
-52-2	Control	48	10	5	9
-52-3	Control	42	30	13	6
-54-2	Control	40	31.1	10.5	8.5
-63-2	Control	32	6.4	34	18
+F1-2	Case	60	NA	NA	15
+F3-1	Case	52	NA	NA	18
+F3-2	Case	48	6	11.5	18
+F4-1	Case	75	NA	NA	13.7
+F5-1	Case	70	NA	NA	18.5
+F6-1	Case	60	NA	NA	30
+F7-1	Case	60	NA	NA	15.1
+F8-1	Case	60	NA	NA	26.2
+F9-1	Case	42	NA	NA	15
+F11-1	Case	65	NA	NA	21
+F12-1	Case	70	NA	NA	18
+F13-1	Case	60	NA	NA	21.1
+F14-1	Case	60	NA	NA	30
+F14-2	Case	36	NA	NA	20
+F15-1	Case	65	NA	NA	28
+F1-1	Control	40	27	18	9.8
+F2-1	Control	75	NA	NA	24
+F2-2	Control	45	22	16	8
+F4-2	Control	45	15	14	19
+F5-2	Control	50	7.8	16.7	9
+F6-2	Control	40	4	22	16
+F7-2	Control	50	4.5	17.7	12
+F8-2	Control	65	1.2	5.8	12.5
+F9-2	Control	50	13	7.8	13.5
+F9-3	Control	49	54.6	10	18
+F10-1	Control	50	11	16	13.2
+F10-2	Control	40	29.5	16.5	4.7
+F11-2	Control	50	7.5	19	15
+F12-2	Control	48	10	5	9
+F12-3	Control	42	30	13	6
+F13-2	Control	40	31.1	10.5	8.5
+F15-2	Control	32	6.4	34	18
